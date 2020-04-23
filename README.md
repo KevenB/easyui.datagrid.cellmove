@@ -1,6 +1,8 @@
 # easyui.datagrid.cellmove
 make easyui-datagrid cell cound drag.
 
+create methods "columnMoving" extends $.fn.datagrid.methods 
+
 $.extend($.fn.datagrid.methods,{
     columnMoving: function(jq, opts){
         return jq.each(function(){
@@ -164,4 +166,4 @@ $.extend($.fn.datagrid.methods,{
             }
         });
     }
-})
+});
