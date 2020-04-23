@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <title>技术预研-easyui-datagrid表头拖动</title>
+        <meta name="description" content="" />
+        <link rel="stylesheet" type="text/css" href="js/themes/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="js/themes/icon.css">
+    </head>
+
+    <body>
+        <div>easyui-datagrid表格表头可拖动功能</div>
+        <div>支持复合表头，不同表间不可拖动，同级表头间可拖动，冻结列和非冻结列间不可互相拖动</div>
+        
+        <table id="vgUp" class="easyui-datagrid" ></table>
+        
+        <table id="vgUp1" class="easyui-datagrid" ></table>
+        
+        <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery.easyui.min.js" type="text/javascript"></script>
+        <script src="js/easyui-datagrid-celldrag.js"></script>
+        <script>
+            $(function(){
+                $('#vgUp').datagrid({
+                    data:[{
+                        listprice1: 10,
+                        listprice2: 102,
+                        unitcost1: 1,
+                        unitcost2: 1111,
+                        itemid: 1,
+                        productid: 10,
+                        text:111,
+                        text1:11111,
+                        text2:'aaaaa'
+                    },{
+                        listprice1: 20,
+                        listprice2: 202,
+                        unitcost1: 2,
+                        unitcost2: 2222,
+                        itemid: 2,
+                        productid: 20,
+                        text:222,
+                        text1:22222,
+                        text2:'bbbbb'
+                    },{
+                        listprice1: 30,
+                        listprice2: 302,
+                        unitcost1: 3,
+                        unitcost2: 33333,
+                        itemid: 3,
+                        productid: 30,
+                        text:333,
+                        text1:33333,
+                        text2:'ccccc'
+                    }],
+                    fitColumns:false,
+                    columns:[[
+                            {field:'id',title:'ID',width:160,colspan:4,align:'left'},
+                            {field:'text-text',title:'text-text',width:160,colspan:2,align:'left'},
+                            {field:'text2',title:'text2',width:80,align:'left',rowspan:3}
+                        ],[
+                        {field:'listprice',title:'List Price',width:80, colspan:2,align:'right',sortable:true,parent:'id'},
+                        {field:'unitcost',title:'Unit Cost',width:80,colspan:2,align:'right',sortable:true, parent:'id'},
+                        {field:'text',title:'text',width:80,align:'left', rowspan:2, parent:"text-text"},
+                        {field:'text1',title:'text1',width:80,align:'left',rowspan:2,parent:"text-text"}
+                    ],[
+                        {field:'listprice1',title:'List Price1',width:40,align:'right',sortable:true,parent:'listprice'},
+                        {field:'listprice2',title:'List Price2',width:40,align:'left',parent:"listprice"},
+                        {field:'unitcost1',title:'Unit Cost1',width:40,align:'right',sortable:true, parent:'unitcost'},
+                        {field:'unitcost2',title:'Unit Cost2',width:40,align:'right',sortable:true, parent:'unitcost'}
+                    ]],
+                    //frozenColumns的元素个数必须同columns个数相同，补空列表元素即可
+                    frozenColumns: [[
+                        {field:'itemid',title:'Item ID',width:80,align:'left',rowspan:3},
+                        {field:'productid',title:'Product ID',width:80,align:'left',rowspan:3}
+                    ],
+                    [
+                        
+                    ],[
+                    
+                    ]]
+                });
+                
+                $('#vgUp').datagrid("columnMoving", {
+                    onStopDrop: function(e){
+                        console.log(111111111111);
+                    }
+                });
+                
+                $('#vgUp1').datagrid({
+                    data:[{
+                        listprice: 101,
+                        unitcost: 11,
+                        itemid: 11,
+                        productid: 101
+                    },{
+                        listprice: 201,
+                        unitcost: 21,
+                        itemid: 21,
+                        productid: 201
+                    },{
+                        listprice: 301,
+                        unitcost: 31,
+                        itemid: 31,
+                        productid: 301
+                    }],
+                    fitColumns:false,
+                    columns:[[
+                        {field:'listprice',title:'List Price',width:80,align:'right',sortable:true},
+                        {field:'unitcost',title:'Unit Cost',width:80,align:'right',sortable:true}
+                    ]],
+                    frozenColumns: [[
+                        {field:'itemid',title:'Item ID',width:80,align:'left'},
+                        {field:'productid',title:'Product ID',width:80,align:'left'}
+                    ]]
+                });
+                
+                $('#vgUp1').datagrid("columnMoving", {
+                    onEndDrag: function(e){
+                        console.log(222222222222);
+                    }
+                });
+            });
+        </script>
+    </body>    
+</html>
